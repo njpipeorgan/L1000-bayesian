@@ -5,17 +5,6 @@
 
 (* CreatedBy='Mathematica 12.0' *)
 
-(*CacheID: 234*)
-(* Internal cache information:
-NotebookFileLineBreakTest
-NotebookFileLineBreakTest
-NotebookDataPosition[       158,          7]
-NotebookDataLength[      8624,        236]
-NotebookOptionsPosition[      6454,        196]
-NotebookOutlinePosition[      6892,        213]
-CellTagsIndexPosition[      6849,        210]
-WindowFrame->Normal*)
-
 (* Beginning of Notebook Content *)
 Notebook[{
 
@@ -33,10 +22,10 @@ Cell[BoxData[{
     RowBox[{"NotebookDirectory", "[", "]"}], "<>", 
     "\"\</../src/dpeak.so\>\""}]}], ";"}], "\[IndentingNewLine]", 
  RowBox[{
-  RowBox[{"wllcudadpeak", "=", 
+  RowBox[{"dpeak", "=", 
    RowBox[{"LibraryFunctionLoad", "[", 
     RowBox[{
-    "$libpath", ",", "\"\<wll_cudadpeak\>\"", ",", "\[IndentingNewLine]", 
+    "$libpath", ",", "\"\<wll_dpeak\>\"", ",", "\[IndentingNewLine]", 
      RowBox[{"{", 
       RowBox[{
        RowBox[{"{", 
@@ -52,8 +41,8 @@ Cell[BoxData[{
         RowBox[{"Real", ",", "1", ",", "\"\<Constant\>\""}], "}"}]}], "}"}], 
      ",", 
      RowBox[{"{", 
-      RowBox[{"Real", ",", "3"}], "}"}]}], "]"}]}], ";"}]}], "Input",
- CellLabel->"In[1]:=",ExpressionUUID->"cb101534-feff-4828-8f2e-2bb16328df18"]
+      RowBox[{"Real", ",", "3"}], "}"}]}], "]"}]}], ";"}]}], "Input",Expressio\
+nUUID->"cb101534-feff-4828-8f2e-2bb16328df18"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -119,7 +108,7 @@ Cell[BoxData[
        RowBox[{"{", 
         RowBox[{"peaksdist", ",", "background"}], "}"}]}], "]"}], ",", "40"}],
      "]"}]}], ";"}]], "Input",
- CellLabel->"In[15]:=",ExpressionUUID->"91820d93-5bb0-42f8-8e10-97aa02706eba"],
+ CellLabel->"In[5]:=",ExpressionUUID->"91820d93-5bb0-42f8-8e10-97aa02706eba"],
 
 Cell["\<\
 Calculate the probability of being a misidentified bead at the values of all \
@@ -131,7 +120,7 @@ Cell[BoxData[
   RowBox[{"bgprob", "=", 
    RowBox[{"PDF", "[", 
     RowBox[{"background", ",", "reads"}], "]"}]}], ";"}]], "Input",
- CellLabel->"In[16]:=",ExpressionUUID->"5247d8d5-304a-4c58-9924-9152019ff0bd"],
+ CellLabel->"In[6]:=",ExpressionUUID->"5247d8d5-304a-4c58-9924-9152019ff0bd"],
 
 Cell["\<\
 The grid of all possible peak locations for likelihood calculation.\
@@ -144,7 +133,7 @@ Cell[BoxData[
   RowBox[{"grid", "=", 
    RowBox[{"Range", "[", 
     RowBox[{"2.0", ",", "14.0", ",", "0.04"}], "]"}]}], ";"}]], "Input",
- CellLabel->"In[20]:=",ExpressionUUID->"19cb028d-bd60-491b-a9c9-3dd886570394"],
+ CellLabel->"In[7]:=",ExpressionUUID->"19cb028d-bd60-491b-a9c9-3dd886570394"],
 
 Cell["Calculate the log-likelihood function. ", "Text",ExpressionUUID->"ae262b52-d7b4-4520-9b46-20c0f465026a"],
 
@@ -152,14 +141,14 @@ Cell[BoxData[
  RowBox[{
   RowBox[{"likelihood", "=", 
    RowBox[{
-    RowBox[{"wllcudadpeak", "[", 
+    RowBox[{"dpeak", "[", 
      RowBox[{
       RowBox[{"{", "reads", "}"}], ",", 
       RowBox[{"{", "0.667", "}"}], ",", 
       RowBox[{"{", "0.05", "}"}], ",", 
       RowBox[{"{", "bgprob", "}"}], ",", "grid"}], "]"}], "[", 
     RowBox[{"[", "1", "]"}], "]"}]}], ";"}]], "Input",
- CellLabel->"In[21]:=",ExpressionUUID->"b752bd61-3c76-4360-9819-462087abc9b7"],
+ CellLabel->"In[8]:=",ExpressionUUID->"b752bd61-3c76-4360-9819-462087abc9b7"],
 
 Cell["The marginal distributions of the locations of two peaks. ", "Text",
  CellFrame->{{0, 0}, {0, 0.5}},
@@ -190,7 +179,7 @@ Cell[BoxData[
     RowBox[{"{", 
      RowBox[{"\"\<2/3\>\"", ",", "\"\<1/3\>\""}], "}"}]}]}], "]"}]], "Input",
  CellGroupingRules->{"GroupTogetherGrouping", 10007.},
- CellLabel->"In[22]:=",ExpressionUUID->"a66b6be7-fa7d-4344-b298-1d4720b5b5ba"]
+ CellLabel->"In[9]:=",ExpressionUUID->"a66b6be7-fa7d-4344-b298-1d4720b5b5ba"]
 }, Open  ]]
 }, Open  ]]
 },
@@ -202,43 +191,3 @@ StyleDefinitions->FrontEnd`FileName[{"Utility"}, "Memo.nb", CharacterEncoding ->
   "UTF-8"]
 ]
 (* End of Notebook Content *)
-
-(* Internal cache information *)
-(*CellTagsOutline
-CellTagsIndex->{}
-*)
-(*CellTagsIndex
-CellTagsIndex->{}
-*)
-(*NotebookFileOutline
-Notebook[{
-Cell[CellGroupData[{
-Cell[580, 22, 96, 0, 125, "Title",ExpressionUUID->"4101bcfe-d6d8-42bf-835c-955f5d933e14"],
-Cell[CellGroupData[{
-Cell[701, 26, 87, 0, 72, "Section",ExpressionUUID->"8e5822b3-3ef5-4f78-8097-fd2402b30ee4"],
-Cell[791, 28, 1057, 27, 98, "Input",ExpressionUUID->"cb101534-feff-4828-8f2e-2bb16328df18"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[1885, 60, 97, 0, 72, "Section",ExpressionUUID->"97b778e5-bf2d-45c2-8ff5-cc5a8206414e"],
-Cell[1985, 62, 175, 3, 39, "Text",ExpressionUUID->"764a88ce-51b4-41ad-ac6f-0d8ef402ebf1"],
-Cell[2163, 67, 510, 14, 39, "Input",ExpressionUUID->"3f254d57-ea11-41c4-a6bf-768a62e1e0f8"],
-Cell[2676, 83, 202, 3, 39, "Text",ExpressionUUID->"18e0b3d2-118f-4088-90c6-fe175d7e3177"],
-Cell[2881, 88, 255, 6, 39, "Input",ExpressionUUID->"eef2509e-d8c1-4a89-8c25-64cd569b9a13"],
-Cell[3139, 96, 412, 11, 39, "Text",ExpressionUUID->"d80264d0-1412-42c4-b624-3b6cd966231f"],
-Cell[3554, 109, 435, 12, 39, "Input",ExpressionUUID->"91820d93-5bb0-42f8-8e10-97aa02706eba"],
-Cell[3992, 123, 165, 3, 39, "Text",ExpressionUUID->"2b3bb00c-e8f7-46dd-984f-d6a7c1334bd9"],
-Cell[4160, 128, 220, 5, 39, "Input",ExpressionUUID->"5247d8d5-304a-4c58-9924-9152019ff0bd"],
-Cell[4383, 135, 182, 4, 50, "Text",ExpressionUUID->"9c6a18be-702e-47ce-8aa0-b7cddb84c939"],
-Cell[4568, 141, 225, 5, 39, "Input",ExpressionUUID->"19cb028d-bd60-491b-a9c9-3dd886570394"],
-Cell[4796, 148, 110, 0, 39, "Text",ExpressionUUID->"ae262b52-d7b4-4520-9b46-20c0f465026a"],
-Cell[4909, 150, 433, 11, 39, "Input",ExpressionUUID->"b752bd61-3c76-4360-9819-462087abc9b7"],
-Cell[5345, 163, 223, 4, 50, "Text",ExpressionUUID->"1e48b6d0-058f-4d45-830a-726a5d866d1f",
- CellGroupingRules->{"GroupTogetherGrouping", 10006.}],
-Cell[5571, 169, 855, 23, 39, "Input",ExpressionUUID->"a66b6be7-fa7d-4344-b298-1d4720b5b5ba",
- CellGroupingRules->{"GroupTogetherGrouping", 10007.}]
-}, Open  ]]
-}, Open  ]]
-}
-]
-*)
-
