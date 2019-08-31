@@ -103,7 +103,7 @@ __global__ void reduce_kernel(const float binomial_var, const float* intparams, 
     *likelihood_ptr = a + (b * b * binomial_var) / (2.0f + 2.0f * c * binomial_var) - 0.5f * __logf(1.0f + c * binomial_var);
 }
 
-void cudadpeak_single(
+void dpeak_single(
     const float dp52_ratio, const float bg,
     const std::vector<float>& values, float* d_values,
     float* h_probpeak, float* d_probpeak,
@@ -147,7 +147,7 @@ void cudadpeak_single(
     cudaMemcpy(h_likelihood, d_likelihood, sizeof(float) * grid_size * grid_size, cudaMemcpyDeviceToHost);
 }
 
-std::vector<float> cudadpeak_batch(
+std::vector<float> dpeak_batch(
     const std::vector<float>& dp52_ratio,                // ratio of dp52 beads
     const std::vector<float>& bg,                        // alpha_c in the paper
     const std::vector<std::vector<float>>& values_batch, // log2-FI in batches
@@ -183,7 +183,7 @@ std::vector<float> cudadpeak_batch(
     for (size_t b = 0; b < batch_size; ++b)
     {
         float* h_likelihood = likelihood_batch.data() + b * grid_size * grid_size;
-        cudadpeak_single(dp52_ratio[b], bg[b],
+        dpeak_single(dp52_ratio[b], bg[b],
             values_batch[b], d_values,
             h_probpeak, d_probpeak,
             probbg_batch[b], h_probbg, d_probbg,

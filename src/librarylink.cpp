@@ -20,16 +20,10 @@
 
 #include "WolframLibrary.h"
 
-#ifdef USE_CUDA
-std::vector<float> cudadpeak_batch(
-    const std::vector<float>&, const std::vector<float>&, const std::vector<std::vector<float>>& values_batch,
-    const std::vector<std::vector<float>>&, const std::vector<float>& peakgrid);
-#else
-std::vector<float> cppdpeak_batch(
-    const std::vector<float>&, const std::vector<float>&, const std::vector<std::vector<float>>& values_batch,
-    const std::vector<std::vector<float>>&, const std::vector<float>& peakgrid);
-#endif
 
+std::vector<float> dpeak_batch(
+    const std::vector<float>&, const std::vector<float>&, const std::vector<std::vector<float>>& values_batch,
+    const std::vector<std::vector<float>>&, const std::vector<float>& peakgrid);
 
 EXTERN_C DLLEXPORT int WolframLibrary_initialize(WolframLibraryData lib_data)
 {
@@ -82,12 +76,7 @@ EXTERN_C DLLEXPORT int wll_dpeak(WolframLibraryData libdata, mint argc, MArgumen
         probbg.push_back(std::vector<float>(probbg_begin, probbg_begin + num_values));
     }
 
-    std::vector<float> likelihood = 
-#ifdef USE_CUDA
-        cudadpeak_batch(dp52ratio, bgratio, values, probbg, peakgrid);
-#else
-        cppdpeak_batch(dp52ratio, bgratio, values, probbg, peakgrid);
-#endif
+    std::vector<float> likelihood = dpeak_batch(dp52ratio, bgratio, values, probbg, peakgrid);
 
     mint likelihood_dims[3] ={ mint(batch_size), mint(grid_size), mint(grid_size) };
     MTensor mt_likelihood;

@@ -24,7 +24,7 @@
 #define PEAK_WIDTH_MODEL(x) (0.15f + 5.3f * std::exp2f(-0.75f * x))
 
 
-std::vector<float> cppdpeak_single(
+std::vector<float> dpeak_single(
     const float dp52_ratio, const float bg,
     const std::vector<float>& values,
     const std::vector<float>& probbg,
@@ -88,7 +88,7 @@ std::vector<float> cppdpeak_single(
     return likelihood;
 }
 
-std::vector<float> cppdpeak_batch(
+std::vector<float> dpeak_batch(
     const std::vector<float>& dp52_ratio,                // ratio of dp52 beads
     const std::vector<float>& bg,                        // alpha_c in the paper
     const std::vector<std::vector<float>>& values_batch, // log2-FI in batches
@@ -102,7 +102,7 @@ std::vector<float> cppdpeak_batch(
 
     for (size_t b = 0; b < batch_size; ++b)
     {
-        std::vector<float> likelihood = cppdpeak_single(dp52_ratio[b], bg[b], values_batch[b], probbg_batch[b], peakgrid);
+        std::vector<float> likelihood = dpeak_single(dp52_ratio[b], bg[b], values_batch[b], probbg_batch[b], peakgrid);
         std::copy_n(likelihood.cbegin(), grid_size * grid_size, likelihood_batch.begin() + b * grid_size * grid_size);
     }
     return likelihood_batch;
