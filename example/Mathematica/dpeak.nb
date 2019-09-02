@@ -19,8 +19,8 @@ Cell[BoxData[{
  RowBox[{
   RowBox[{"$libpath", "=", 
    RowBox[{
-    RowBox[{"NotebookDirectory", "[", "]"}], "<>", 
-    "\"\</../src/dpeak.so\>\""}]}], ";"}], "\[IndentingNewLine]", 
+    RowBox[{"NotebookDirectory", "[", "]"}], "<>", "\"\</dpeak.so\>\""}]}], 
+  ";"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{"dpeak", "=", 
    RowBox[{"LibraryFunctionLoad", "[", 
@@ -41,8 +41,8 @@ Cell[BoxData[{
         RowBox[{"Real", ",", "1", ",", "\"\<Constant\>\""}], "}"}]}], "}"}], 
      ",", 
      RowBox[{"{", 
-      RowBox[{"Real", ",", "3"}], "}"}]}], "]"}]}], ";"}]}], "Input",Expressio\
-nUUID->"cb101534-feff-4828-8f2e-2bb16328df18"]
+      RowBox[{"Real", ",", "3"}], "}"}]}], "]"}]}], ";"}]}], "Input",
+ CellLabel->"In[1]:=",ExpressionUUID->"cb101534-feff-4828-8f2e-2bb16328df18"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -60,7 +60,9 @@ Cell[BoxData[
    RowBox[{"MixtureDistribution", "[", 
     RowBox[{
      RowBox[{"{", 
-      RowBox[{"0.667", ",", "0.333"}], "}"}], ",", 
+      RowBox[{
+       RowBox[{"2", "/", "3."}], ",", 
+       RowBox[{"1", "/", "3."}]}], "}"}], ",", 
      RowBox[{"{", 
       RowBox[{
        RowBox[{"NormalDistribution", "[", 
@@ -93,7 +95,8 @@ background with a misidentification rate ",
      StyleBox["c",
       FontSlant->"Plain"]]}], TraditionalForm]],ExpressionUUID->
   "b6ca3966-d1dc-47e7-a05f-eed259ec4a38"],
- ") of 5%."
+ ") of 4%.\nIn the actual calculations, multiple ratios are used, and the \
+likelihood functions are combined by their probability."
 }], "Text",ExpressionUUID->"d80264d0-1412-42c4-b624-3b6cd966231f"],
 
 Cell[BoxData[
@@ -104,90 +107,194 @@ Cell[BoxData[
      RowBox[{"MixtureDistribution", "[", 
       RowBox[{
        RowBox[{"{", 
-        RowBox[{"0.95", ",", "0.05"}], "}"}], ",", 
+        RowBox[{"0.96", ",", "0.04"}], "}"}], ",", 
        RowBox[{"{", 
         RowBox[{"peaksdist", ",", "background"}], "}"}]}], "]"}], ",", "40"}],
      "]"}]}], ";"}]], "Input",
  CellLabel->"In[5]:=",ExpressionUUID->"91820d93-5bb0-42f8-8e10-97aa02706eba"],
 
+Cell[BoxData[
+ RowBox[{"Histogram", "[", 
+  RowBox[{"reads", ",", 
+   RowBox[{"{", "0.4", "}"}], ",", 
+   RowBox[{"PlotRange", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"2", ",", "14"}], "}"}], ",", "All"}], "}"}]}]}], 
+  "]"}]], "Input",
+ CellLabel->"In[6]:=",ExpressionUUID->"b62adff8-c9da-4e1f-b031-0e155a746825"],
+
 Cell["\<\
-Calculate the probability of being a misidentified bead at the values of all \
-reads. \
-\>", "Text",ExpressionUUID->"2b3bb00c-e8f7-46dd-984f-d6a7c1334bd9"],
+Calculate the probability of coming from a misidentified bead at the values \
+of all reads.\
+\>", "Text",
+ CellFrame->{{0, 0}, {
+   0, 0.5}},ExpressionUUID->"2b3bb00c-e8f7-46dd-984f-d6a7c1334bd9"],
 
 Cell[BoxData[
  RowBox[{
   RowBox[{"bgprob", "=", 
    RowBox[{"PDF", "[", 
     RowBox[{"background", ",", "reads"}], "]"}]}], ";"}]], "Input",
- CellLabel->"In[6]:=",ExpressionUUID->"5247d8d5-304a-4c58-9924-9152019ff0bd"],
+ CellLabel->"In[7]:=",ExpressionUUID->"5247d8d5-304a-4c58-9924-9152019ff0bd"],
 
 Cell["\<\
 The grid of all possible peak locations for likelihood calculation.\
-\>", "Text",
- CellFrame->{{0, 0}, {
-   0, 0.5}},ExpressionUUID->"9c6a18be-702e-47ce-8aa0-b7cddb84c939"],
+\>", "Text",ExpressionUUID->"9c6a18be-702e-47ce-8aa0-b7cddb84c939"],
 
 Cell[BoxData[
  RowBox[{
   RowBox[{"grid", "=", 
    RowBox[{"Range", "[", 
     RowBox[{"2.0", ",", "14.0", ",", "0.04"}], "]"}]}], ";"}]], "Input",
- CellLabel->"In[7]:=",ExpressionUUID->"19cb028d-bd60-491b-a9c9-3dd886570394"],
+ CellLabel->"In[8]:=",ExpressionUUID->"19cb028d-bd60-491b-a9c9-3dd886570394"],
 
-Cell["Calculate the log-likelihood function. ", "Text",ExpressionUUID->"ae262b52-d7b4-4520-9b46-20c0f465026a"],
+Cell["Calculate the log-likelihood function. ", "Text",
+ CellFrame->{{0, 0}, {
+   0, 0.5}},ExpressionUUID->"ae262b52-d7b4-4520-9b46-20c0f465026a"],
 
 Cell[BoxData[
  RowBox[{
   RowBox[{"likelihood", "=", 
-   RowBox[{
+   RowBox[{"First", "@", 
     RowBox[{"dpeak", "[", 
      RowBox[{
       RowBox[{"{", "reads", "}"}], ",", 
-      RowBox[{"{", "0.667", "}"}], ",", 
-      RowBox[{"{", "0.05", "}"}], ",", 
-      RowBox[{"{", "bgprob", "}"}], ",", "grid"}], "]"}], "[", 
-    RowBox[{"[", "1", "]"}], "]"}]}], ";"}]], "Input",
- CellLabel->"In[8]:=",ExpressionUUID->"b752bd61-3c76-4360-9819-462087abc9b7"],
+      RowBox[{"(*", "dp52_ratio", "*)"}], 
+      RowBox[{"{", 
+       RowBox[{"2", "/", "3."}], "}"}], ",", 
+      RowBox[{"(*", "bg_ratio", "*)"}], 
+      RowBox[{"{", "0.04", "}"}], ",", 
+      RowBox[{"{", "bgprob", "}"}], ",", "grid"}], "]"}]}]}], ";"}]], "Input",\
 
-Cell["The marginal distributions of the locations of two peaks. ", "Text",
+ CellLabel->"In[9]:=",ExpressionUUID->"b752bd61-3c76-4360-9819-462087abc9b7"],
+
+Cell["\<\
+Calculate the marginal distributions of the locations of two peaks. \
+\>", "Text",
  CellFrame->{{0, 0}, {0, 0.5}},
  CellGroupingRules->{
   "GroupTogetherGrouping", 
    10006.},ExpressionUUID->"1e48b6d0-058f-4d45-830a-726a5d866d1f"],
 
-Cell[BoxData[
- RowBox[{"ListLinePlot", "[", 
-  RowBox[{
-   RowBox[{"Table", "[", 
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"marginalhi", "=", 
+   RowBox[{"ProbabilityDistribution", "[", "\[IndentingNewLine]", 
     RowBox[{
-     RowBox[{"Transpose", "@", 
-      RowBox[{"{", 
-       RowBox[{"grid", ",", 
-        RowBox[{
-         RowBox[{
-          RowBox[{"#", "/", 
-           RowBox[{"Max", "[", "#", "]"}]}], "&"}], "@", 
-         RowBox[{"Total", "[", 
-          RowBox[{
-           RowBox[{"Exp", "@", "likelihood"}], ",", 
-           RowBox[{"{", "i", "}"}]}], "]"}]}]}], "}"}]}], ",", 
+     RowBox[{"Exp", "@", 
+      RowBox[{
+       RowBox[{"Interpolation", "[", 
+        RowBox[{"Transpose", "@", 
+         RowBox[{"{", 
+          RowBox[{"grid", ",", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"Log", "[", 
+              RowBox[{
+               RowBox[{"#", "/", 
+                RowBox[{"Total", "[", "#", "]"}]}], "/", "0.04"}], "]"}], 
+             "&"}], "@", 
+            RowBox[{"Total", "[", 
+             RowBox[{
+              RowBox[{"Exp", "@", "likelihood"}], ",", 
+              RowBox[{"{", "2", "}"}]}], "]"}]}]}], "}"}]}], "]"}], "[", "x", 
+       "]"}]}], ",", 
      RowBox[{"{", 
-      RowBox[{"i", ",", "2"}], "}"}]}], "]"}], ",", 
+      RowBox[{"x", ",", "2", ",", "14"}], "}"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"marginallo", "=", 
+   RowBox[{"ProbabilityDistribution", "[", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"Exp", "@", 
+      RowBox[{
+       RowBox[{"Interpolation", "[", 
+        RowBox[{"Transpose", "@", 
+         RowBox[{"{", 
+          RowBox[{"grid", ",", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"Log", "[", 
+              RowBox[{
+               RowBox[{"#", "/", 
+                RowBox[{"Total", "[", "#", "]"}]}], "/", "0.04"}], "]"}], 
+             "&"}], "@", 
+            RowBox[{"Total", "[", 
+             RowBox[{
+              RowBox[{"Exp", "@", "likelihood"}], ",", 
+              RowBox[{"{", "1", "}"}]}], "]"}]}]}], "}"}]}], "]"}], "[", "x", 
+       "]"}]}], ",", 
+     RowBox[{"{", 
+      RowBox[{"x", ",", "2", ",", "14"}], "}"}]}], "]"}]}], ";"}]}], "Input",
+ CellLabel->"In[10]:=",ExpressionUUID->"1d227405-ef66-49ba-b146-b30816b5c309"],
+
+Cell[BoxData[
+ RowBox[{"Plot", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"PDF", "[", 
+      RowBox[{"marginalhi", ",", "x"}], "]"}], ",", 
+     RowBox[{"PDF", "[", 
+      RowBox[{"marginallo", ",", "x"}], "]"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"x", ",", "2", ",", "14"}], "}"}], ",", 
    RowBox[{"PlotRange", "\[Rule]", "All"}], ",", 
    RowBox[{"PlotLegends", "\[Rule]", 
     RowBox[{"{", 
      RowBox[{"\"\<2/3\>\"", ",", "\"\<1/3\>\""}], "}"}]}]}], "]"}]], "Input",
- CellGroupingRules->{"GroupTogetherGrouping", 10007.},
- CellLabel->"In[9]:=",ExpressionUUID->"a66b6be7-fa7d-4344-b298-1d4720b5b5ba"]
+ CellLabel->"In[12]:=",ExpressionUUID->"c1198634-c1fc-46f0-8ed1-37d5e32d59c4"],
+
+Cell["\<\
+Scaling/normalization can be added on the marginal distributions. \
+\>", "Text",ExpressionUUID->"95d816d1-1d08-4b8b-96e2-7875f6da16d8"],
+
+Cell["\<\
+We choose an idealized reference distribution for the high-abundance peak. \
+\>", "Text",
+ CellFrame->{{0, 0}, {
+   0, 0.5}},ExpressionUUID->"e2d2f0f6-778e-455b-9b40-1a89873cc67c"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"refdist", "=", 
+   RowBox[{"NormalDistribution", "[", 
+    RowBox[{"9.0", ",", "1.0"}], "]"}]}], ";"}]], "Input",
+ CellLabel->"In[13]:=",ExpressionUUID->"da76fac4-2ac3-4611-af76-ef04534b21bd"],
+
+Cell["\<\
+Calculate the z-score based on the quantile of the marginal distribution. \
+\>", "Text",ExpressionUUID->"56fc4181-1901-4e1b-9a50-40ea44e18051"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"quantilehi", "=", 
+   RowBox[{"NProbability", "[", 
+    RowBox[{
+     RowBox[{"x", ">", "ref"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"x", "\[Distributed]", "marginalhi"}], ",", 
+       RowBox[{"ref", "\[Distributed]", "refdist"}]}], "}"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"zscorehi", "=", 
+  RowBox[{
+   RowBox[{"Sqrt", "[", "2", "]"}], 
+   RowBox[{"InverseErf", "[", 
+    RowBox[{
+     RowBox[{"2", "quantilehi"}], "-", "1"}], "]"}]}]}]}], "Input",
+ CellLabel->"In[14]:=",ExpressionUUID->"2579d118-b55c-4d3a-bdca-377f0e7d082b"]
 }, Open  ]]
 }, Open  ]]
 },
 WindowSize->{1920, 1005},
 WindowMargins->{{0, Automatic}, {0, Automatic}},
 TaggingRules->{"NewCellStyle" -> "Text"},
+TrackCellChangeTimes->True,
 FrontEndVersion->"12.0 for Linux x86 (64-bit) (April 8, 2019)",
-StyleDefinitions->FrontEnd`FileName[{"Utility"}, "Memo.nb", CharacterEncoding -> 
-  "UTF-8"]
+StyleDefinitions->"Default.nb"
 ]
 (* End of Notebook Content *)
+
