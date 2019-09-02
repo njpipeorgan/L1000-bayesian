@@ -20,12 +20,12 @@
 #include <vector>
 #include <algorithm>
 
-// scale parameter of the peak as a function of expression level x
-#define PEAK_WIDTH_MODEL(x) (0.15f + 5.3f * std::exp2f(-0.75f * x))
+#include "dpeak.h"
 
 
 std::vector<float> dpeak_single(
-    const float dp52_ratio, const float bg,
+    const float dp52_ratio, 
+    const float bg,
     const std::vector<float>& values,
     const std::vector<float>& probbg,
     const std::vector<float>& peakgrid)
@@ -80,8 +80,8 @@ std::vector<float> dpeak_single(
                 b += diff[r];
                 c += diff[r] * diff[r];
             }
-            likelihood[e52 * n_grid + e53] =
-                a + (b * b * binomial_var) / (2.0f + 2.0f * c * binomial_var) - 0.5f * std::log(1.0f + c * binomial_var);
+            likelihood[e52 * n_grid + e53] = a + (b * b * binomial_var) / (2.0f + 2.0f * c * binomial_var) 
+                                             - 0.5f * std::log(1.0f + c * binomial_var);
         }
     }
 
@@ -89,11 +89,11 @@ std::vector<float> dpeak_single(
 }
 
 std::vector<float> dpeak_batch(
-    const std::vector<float>& dp52_ratio,                // ratio of dp52 beads
-    const std::vector<float>& bg,                        // alpha_c in the paper
-    const std::vector<std::vector<float>>& values_batch, // log2-FI in batches
-    const std::vector<std::vector<float>>& probbg_batch, // PDF of all reads at each log2-FI
-    const std::vector<float>& peakgrid)                  // grid points of peak locations
+    const std::vector<float>& dp52_ratio,
+    const std::vector<float>& bg,
+    const std::vector<std::vector<float>>& values_batch,
+    const std::vector<std::vector<float>>& probbg_batch,
+    const std::vector<float>& peakgrid)
 {
     const size_t grid_size = peakgrid.size();
     const size_t batch_size = values_batch.size();
@@ -102,8 +102,10 @@ std::vector<float> dpeak_batch(
 
     for (size_t b = 0; b < batch_size; ++b)
     {
-        std::vector<float> likelihood = dpeak_single(dp52_ratio[b], bg[b], values_batch[b], probbg_batch[b], peakgrid);
-        std::copy_n(likelihood.cbegin(), grid_size * grid_size, likelihood_batch.begin() + b * grid_size * grid_size);
+        std::vector<float> likelihood = 
+            dpeak_single(dp52_ratio[b], bg[b], values_batch[b], probbg_batch[b], peakgrid);
+        std::copy_n(likelihood.cbegin(), grid_size * grid_size, 
+                    likelihood_batch.begin() + b * grid_size * grid_size);
     }
     return likelihood_batch;
 }

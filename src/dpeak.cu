@@ -23,9 +23,6 @@
 // maximum number of reads per bead color
 #define CUDA_PROBPEAK_STRIDE 512
 
-// scale parameter of the peak as a function of expression level x
-#define PEAK_WIDTH_MODEL(x) (0.15f + 5.3f * exp2f(-0.75f * x))
-
 
 __global__ void probpeak_kernel(const float bg1m, const float* values, const float* peakgrid, float* probpeak)
 {
@@ -100,10 +97,11 @@ __global__ void reduce_kernel(const float binomial_var, const float* intparams, 
     float a = params_ptr[0];
     float b = params_ptr[1];
     float c = params_ptr[2];
-    *likelihood_ptr = a + (b * b * binomial_var) / (2.0f + 2.0f * c * binomial_var) - 0.5f * __logf(1.0f + c * binomial_var);
+    *likelihood_ptr = a + (b * b * binomial_var) / (2.0f + 2.0f * c * binomial_var) 
+                      - 0.5f * __logf(1.0f + c * binomial_var);
 }
 
-void dpeak_single(
+void cudadpeak_single(
     const float dp52_ratio, const float bg,
     const std::vector<float>& values, float* d_values,
     float* h_probpeak, float* d_probpeak,
@@ -148,11 +146,11 @@ void dpeak_single(
 }
 
 std::vector<float> dpeak_batch(
-    const std::vector<float>& dp52_ratio,                // ratio of dp52 beads
-    const std::vector<float>& bg,                        // alpha_c in the paper
-    const std::vector<std::vector<float>>& values_batch, // log2-FI in batches
-    const std::vector<std::vector<float>>& probbg_batch, // PDF of all reads at each log2-FI
-    const std::vector<float>& peakgrid)                  // grid points of peak locations
+    const std::vector<float>& dp52_ratio,
+    const std::vector<float>& bg,
+    const std::vector<std::vector<float>>& values_batch,
+    const std::vector<std::vector<float>>& probbg_batch,
+    const std::vector<float>& peakgrid)
 {
     const size_t batch_size = values_batch.size();
     const size_t grid_size = peakgrid.size();
@@ -200,4 +198,3 @@ std::vector<float> dpeak_batch(
 
     return likelihood_batch;
 }
-
