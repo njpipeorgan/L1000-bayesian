@@ -33,7 +33,7 @@ Each marginal distribution catalog contain the information of peak locations on 
 
 ## Installation
 
-The Bayesian peak deconvolution algorithm has implementations in two languages &mdash; C++ and CUDA. They can be directly call from other C++ code or compiled and linked to external code. Note that the implementation in CUDA is typically more efficient, so it is preferred if you want to test the algorithm on a large scale. 
+The Bayesian peak deconvolution algorithm has implementations in two languages &mdash; C++ and CUDA. They can be directly called from other C++ code or compiled and linked to external code. Note that the implementation in CUDA is typically more efficient, so it is preferred if you want to test the algorithm on a large scale. 
 
 Here we give an example of compiling them to a shared library that can be called from *Wolfram Mathematica*. The environment variable `$InstallationDirectory` below is the directory where you installed *Mathematica*. 
 
@@ -47,5 +47,5 @@ Here we give an example of compiling them to a shared library that can be called
 
 See [example/dpeak.nb](example/dpeak.nb) for how to load a *LibraryLink* function from the `dpeak.so`. 
 
-
+See [example/example_dpeak.cpp](example/example_dpeak) for how to use the dpeak function in C++.
 ## Citation
