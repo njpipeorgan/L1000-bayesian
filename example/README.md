@@ -1,4 +1,4 @@
-# Peak Deconvolution Examples
+# Peak deconvolution examples
 
 Here we give two examples to show how to use the Bayesian peak deconvolution algorithm. The Bayesian peak deconvolution algorithm has implementations in two languages &mdash; C++ and CUDA. The implementation in CUDA is typically more efficient, so it is preferred if you want to test the algorithm on a large scale.
 
