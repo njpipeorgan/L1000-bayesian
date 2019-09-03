@@ -1,6 +1,6 @@
 # Peak deconvolution examples
 
-Here we give two examples to show how to use the Bayesian peak deconvolution algorithm. The Bayesian peak deconvolution algorithm has implementations in two languages &mdash; C++ and CUDA. The implementation in CUDA is typically more efficient, so it is preferred if you want to test the algorithm on a large scale.
+Here we give two examples to show how to use the Bayesian peak deconvolution algorithm. The algorithm has implementations in two languages &mdash; C++ and CUDA. The implementation in CUDA is typically more efficient, so it is preferred if you want to test the algorithm on a large scale.
 
 The examples will illustrate how to get a *z*-score from raw fluorescent intensity values, which includes
 
@@ -8,13 +8,13 @@ The examples will illustrate how to get a *z*-score from raw fluorescent intensi
 
 * Setup parameters for likelihood calculation;
 
-* Calculate a two-dimensional log-likelihood function for the locations of two peaks.
+* Calculate a two-dimensional log-likelihood function for the locations of two peaks;
 
 * Calculate the marginal distributions of the locations;
 
-* Adopt an idealized reference distribution to get a *z*-score.
+* Adopt an idealized reference gene expression distribution to get a *z*-score.
 
-Scaling and normalization of the marginal distributions depends of the reads from other beads/wells, so they are not included in the examples.
+Scaling and normalization of the marginal distributions depend on the reads from other beads/wells, so they are not included in the examples.
 
 ## Usage
 
@@ -40,4 +40,4 @@ Alternatively, you can use the CUDA implementation by
 
     nvcc -I$InstallationDirectory/SystemFiles/IncludeFiles/C --shared -Xcompiler "-fPIC" -o dpeak.so librarylink.cpp ../../src/dpeak.cu
 
-Finally, open `dpeak.nb` and evaluate the cells in order. `dpeak.pdf` shows the results from a run.
+Finally, open `dpeak.nb` and evaluate the cells in order. `dpeak.pdf` shows an example of the results from a run.
