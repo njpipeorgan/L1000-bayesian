@@ -20,6 +20,8 @@
 #include "cuda_runtime.h"
 #include "device_launch_parameters.h"
 
+#include "dpeak.h"
+
 // maximum number of reads per bead color
 #define CUDA_PROBPEAK_STRIDE 512
 
@@ -181,7 +183,7 @@ std::vector<float> dpeak_batch(
     for (size_t b = 0; b < batch_size; ++b)
     {
         float* h_likelihood = likelihood_batch.data() + b * grid_size * grid_size;
-        dpeak_single(dp52_ratio[b], bg[b],
+        cudadpeak_single(dp52_ratio[b], bg[b],
             values_batch[b], d_values,
             h_probpeak, d_probpeak,
             probbg_batch[b], h_probbg, d_probbg,
