@@ -1,7 +1,7 @@
 # L1000 peak deconvolution based on Bayesian analysis
 
 ## Overview
-This project is intended to generate high quality perturbagen signatures from LINCS L1000 assay. A pipeline is built to process raw fluorescent intensity data into z-scores as perturbagen signatures (see [pipeline](https://github.com/njpipeorgan/L1000-bayesian/tree/master/pipeline)). Also, pre-computed dataset for LINCS L1000 Phase I and Phase II is available in [Downloads](#Downloads).
+This project is intended to generate high quality perturbagen signatures from LINCS L1000 assay. A [pipeline](/pipeline) is built to process raw fluorescent intensity data into z-scores as perturbagen signatures. An [example](/example) for peak deconvolution algorithm is also given. Also, pre-computed dataset for LINCS L1000 Phase I and Phase II is available in [Downloads](#Downloads).
  
 
 ## Dataset
