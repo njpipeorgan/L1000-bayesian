@@ -1,5 +1,15 @@
 # L1000 Bayesian pipeline
 
+## Pipeline overview
+The pipeline takes raw fluorescence intensity data from  LINCS L1000 Phase II datasets as input and gives a combined *z*-score profile for each experiment as its signature. The pipeline is composed the following steps:
+1. LISS and quality control. In this step, we perform a two step linear scaling to calibrate the fluorescent intensities. We have make sure  the example data is of good quality, but you can add different type of quality control based on your need. 
+2. Peak deconvolution. For beads coupled with two different transcript barcodes, a deconvolution step is involved to infer the peak position for each gene. Two probability distributions will be given to the transcripts as the estimations of their expression levels.
+3. Quantile normalization. The shape of expression profile is standardized across all samples on the same plate so that different samples on the same plate are comparable to each other.
+4. *z*-score inference. *z*-scores are inferred from the probability distribution for each gene to represent relative gene expression.
+5. Combining replicates. There are no replicates in the sample dataset. If there are replicates in your dataset, you can combine the z-scores you get from this pipeline.
+
+
+
 ## Prerequisites
 
 To run the pipeline, you should have [*Wolfram Mathematica*](http://www.wolfram.com/mathematica/) or the free [*Wolfram Engine*](https://www.wolfram.com/engine/) installed. Run the following command to validate the installation: 
