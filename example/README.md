@@ -1,6 +1,13 @@
-# Peak deconvolution examples
 
-Here we give two examples to show how to use the Bayesian peak deconvolution algorithm. The algorithm has implementations in two languages &mdash; C++ and CUDA. The implementation in CUDA is typically more efficient, so it is preferred if you want to test the algorithm on a large scale.
+# Peak deconvolution examples
+Here we give two examples for using the Bayesian peak deconvolution algorithm. 
+
+## Background
+L1000 uses the Luminex FlexMap 3D platform, which can identify 500 different bead color as tags for different genes. To measure all 978 landmark genes within one scan, L1000 separately coupled two gene barcodes to aliquots of the same bead color and mixed them with a ratio of 2:1. In consequence, two peaks in the distribution of fluorescent intensity are expected, and a deconvolution step is involved here to access the expression of a certain gene. 
+
+## Implementation
+
+The algorithm has implementations in two languages &mdash; [C++]() and [CUDA](). The implementation in CUDA is typically more efficient, so it is preferred if you want to test the algorithm on a large scale.
 
 The examples will illustrate how to get a *z*-score from raw fluorescent intensity values, which includes
 
