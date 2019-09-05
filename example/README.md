@@ -7,7 +7,7 @@ L1000 uses the Luminex FlexMap 3D platform, which can identify 500 different bea
 
 ## Implementation
 
-The algorithm has implementations in two languages &mdash; [C++]() and [CUDA](). The implementation in CUDA is typically more efficient, so it is preferred if you want to test the algorithm on a large scale.
+The algorithm has [implementations](/src) in two languages &mdash; C++ and CUDA. The implementation in CUDA is typically more efficient, so it is preferred if you want to test the algorithm on a large scale.
 
 The examples will illustrate how to get a *z*-score from raw fluorescent intensity values, which includes
 
