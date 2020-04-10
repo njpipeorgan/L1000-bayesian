@@ -47,3 +47,5 @@ Each marginal distribution file contain the information of peak locations on one
 * `/data` are encoded log-likelihoods as a rank-3 array of 16-bit unsigned integers. To retrieve the log-likelihoods, the values should be multiplied by a factor of `-0.001`. Note that they are not normalized. 
 
 ## Citation
+
+Qiu, Yue, et al. (2020), (Bioinformatics)[https://doi.org/10.1093/bioinformatics/btaa064]
