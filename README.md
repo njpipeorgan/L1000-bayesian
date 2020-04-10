@@ -48,4 +48,4 @@ Each marginal distribution file contain the information of peak locations on one
 
 ## Citation
 
-Qiu, Yue, et al. (2020), (Bioinformatics)[https://doi.org/10.1093/bioinformatics/btaa064]
+Qiu, Yue, *et al.* (2020), [Bioinformatics](https://doi.org/10.1093/bioinformatics/btaa064)
