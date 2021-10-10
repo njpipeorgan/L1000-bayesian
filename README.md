@@ -1,7 +1,7 @@
 # L1000 peak deconvolution based on Bayesian analysis
 
 ## Overview
-This project is intended to generate high quality perturbagen signatures from LINCS L1000 assay. We build a pipeline, in parallel with L1000 group, to process raw fluorescent intensity data into *z*-scores as perturbagen signatures. Pre-computed datasets covering a majority of LINCS L1000 Phase I and Phase II is available in [Downloads](#Downloads). 
+This project is intended to generate high quality perturbagen signatures from LINCS L1000 assay. We build a pipeline, in parallel with L1000 group, to process raw fluorescent intensity data into *z*-scores as perturbagen signatures. Pre-computed datasets covering a majority of LINCS L1000 Phase I and Phase II is available in [Downloads](#Downloads) and [Zenodo](https://zenodo.org/record/5559183#.YWJS39rMKUk). 
 
 Our pipeline is different from the L1000 pipeline mostly in the peak deconvolution algorithm. We implement our algorithm in both C++ and CUDA, which can be used with various languages. We give two [examples](/example) for how to use these functions with C++ natively and how to be called in *Wolfram Mathematica*. 
 
